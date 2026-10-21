@@ -1,0 +1,104 @@
+lsof commands — the everyday set
+from "lsof for Mere Mortals"
+====================================================================
+
+Every output quoted in the guide was captured
+from lsof 4.95.0 (Ubuntu 4.95.0-1build3)
+against planted processes: a tail -f, the
+hold.py and listen.py scripts in this folder,
+a sleeper, and one scratch user. PIDs in the
+guide are the captures' own.
+
+
+THE THREE QUESTIONS
+--------------------
+    lsof /path/to/file          who holds this file?
+    lsof -p PID                 what does this process hold?
+    lsof -i :8734               what is on this port
+                                (any state, either protocol)
+    lsof                        everything (thousands of rows:
+                                a data source, not a reading list)
+
+
+READING A PROCESS (chapter 2)
+--------------------
+    lsof -p PID                 the whole table: cwd, rtd, txt,
+                                mem, then numbered descriptors
+    lsof -a -p PID -d cwd       just its working directory
+    lsof -a -p PID -d txt       just the binary it runs
+    FD letters: 3r read, 4w write, 5u both;
+    named rows (cwd/rtd/txt/mem) carry no letter
+
+
+BY NAME AND BY TREE (chapter 3)
+--------------------
+    lsof /path/to/dir           who holds THE DIRECTORY ITSELF
+                                (a cwd in it, typically) --
+                                not the files inside it
+    lsof +D /path/to/tree       who holds anything UNDER it,
+                                recursively; slow on big trees
+                                (2.8 s for /usr in the lab);
+                                its exit code is not a verdict
+
+
+DELETED BUT OPEN (chapter 4)
+--------------------
+    lsof +L1                    every open file with no name
+                                left, sizes in SIZE/OFF --
+                                the full-disk audit
+    lsof -a -p PID +L1          the same, for one suspect pid
+    (the space returns when the holder closes or
+     exits -- check df before and after)
+
+
+PORTS AND SOCKETS (chapter 5)
+--------------------
+    lsof -iTCP:8734 -sTCP:LISTEN   who listens on this TCP port
+    lsof -iUDP:8734                 who holds this UDP port
+    lsof -i @host                   connections involving host
+    lsof -nP -i :8734           names off, ports as numbers:
+                                faster and script-clearer
+    ss -ltnp / ss -tnp          the same questions, socket-native
+                                (states, queues; no files)
+
+
+COMBINING (chapter 6)
+--------------------
+    lsof -p PID -i :8734        OR: PID's everything PLUS the
+                                port's rows (probably not
+                                what you meant)
+    lsof -a -p PID -i :8734     AND: PID's rows on that port
+    lsof -a -p 100,200 -d cwd   a pid list, fenced by -a
+    lsof -a -p 100,^200 -d cwd  ^ inside a list excludes
+    lsof -c tail                by command name (the truncated
+                                COMMAND name; scripts appear
+                                as their interpreter)
+    lsof -u alice               by user
+
+
+SCRIPTING (chapter 7)
+--------------------
+    lsof -F0 -p PID             field output, NUL-separated:
+                                the form to parse (open-files.sh)
+    lsof -r 2 -i :8734          repeat every 2 s, =======
+                                between snapshots; bound it
+                                with timeout
+    exit codes: plain selections -- 0 found, 1 not found.
+    After +D / +L -- test the output, not $?.
+
+
+WHOSE EYES (chapter 8)
+--------------------
+    (as yourself)  lsof         your processes in full;
+                                other users' as skeletons
+                                (unknown / NOFD), or silence
+    sudo lsof ...               the full table, when the
+                                question is about others
+
+
+SAFETY, ONE LINE
+--------------------
+    Identify before you kill: a row gives a pid,
+    not a verdict. Prefer the service's own
+    restart/reload; fuser -k is a pre-aimed
+    SIGKILL at every match.

@@ -1,0 +1,24 @@
+site_name: lsof for Mere Mortals
+site_description: Plain-language open-file detective work with lsof. Which process holds this file, this port, this deleted-but-open disk space, answered on planted processes whose state changes prove every claim.
+site_url: https://paulsullivan33-dev.github.io/lsof-for-mere-mortals/
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What lsof Is: what-lsof-is.md
+  - Reading a Process: reading-a-process.md
+  - Who Has This File: who-has-this-file.md
+  - Deleted but Open: deleted-but-open.md
+  - Ports and Sockets: ports-and-sockets.md
+  - Combining Selections: combining-selections.md
+  - Scripting with lsof: scripting-with-lsof.md
+  - Whose Eyes: whose-eyes.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md
