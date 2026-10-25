@@ -157,3 +157,19 @@ tiny and self-cleaning: two scripts in
 yourself. Practise on those before pointing
 lsof at a production incident; the commands
 are the same, and the calm is transferable.
+
+---
+
+## Part of the series
+
+This guide is one of the [For Mere Mortals](https://paulsullivan33-dev.github.io/mere-mortals/) guides: plain-language guides to the tools programmers and makers use.
+
+Related guides:
+
+- [Watching Your System for Mere Mortals](https://paulsullivan33-dev.github.io/watching-your-system-for-mere-mortals/)
+- [Ncdu for Mere Mortals](https://paulsullivan33-dev.github.io/ncdu-for-mere-mortals/)
+- [tcpdump for Mere Mortals](https://paulsullivan33-dev.github.io/tcpdump-for-mere-mortals/)
+
+## License
+
+The writing in this guide is licensed under [CC BY 4.0](https://github.com/paulsullivan33-dev/lsof-for-mere-mortals/blob/main/LICENSE). Code examples and lab scripts are licensed under the [MIT License](https://github.com/paulsullivan33-dev/lsof-for-mere-mortals/blob/main/LICENSE-CODE).

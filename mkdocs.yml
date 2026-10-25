@@ -1,6 +1,7 @@
 site_name: lsof for Mere Mortals
 site_description: Plain-language open-file detective work with lsof. Which process holds this file, this port, this deleted-but-open disk space, answered on planted processes whose state changes prove every claim.
 site_url: https://paulsullivan33-dev.github.io/lsof-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
 
 # Guides live at the repo root (nice for GitHub browsing).
 # The deploy workflow copies them into docs/ before building.
